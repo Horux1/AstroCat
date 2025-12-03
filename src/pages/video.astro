@@ -1,3 +1,8 @@
+---
+// src/pages/video.astro
+---
+
+
 
 <!doctype html>
 <html lang="en">
@@ -5,21 +10,335 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>cat-vite</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+          "Segoe UI", sans-serif;
+        background: #000;
+        color: #fff;
+        overflow-x: hidden;
+      }
+
+      /* SECCIÓN HERO CON EFECTO APPLE */
+      .hero-section {
+        position: relative;
+        height: 300vh;
+      }
+
+      .hero-content {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem;
+        z-index: 10;
+      }
+
+      .hero-title {
+        font-size: 12vw;
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        opacity: 1;
+        transform: scale(1);
+        will-change: transform, opacity;
+      }
+
+      /* SECCIÓN CON VIDEO/GIF DE FONDO */
+      .content-section {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .background-media {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: 1;
+      }
+
+      .blur-box {
+        position: relative;
+        z-index: 2;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 30px;
+        padding: 4rem 3rem;
+        max-width: 800px;
+        margin: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      }
+
+      .blur-box h2 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        margin-bottom: 2rem;
+        font-weight: 700;
+      }
+
+      .fade-paragraph {
+        font-size: clamp(1rem, 2.5vw, 1.3rem);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.8s ease-out,
+          transform 0.8s ease-out;
+      }
+
+      .fade-paragraph.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* BOTÓN CON GIF */
+      .button-section {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        padding: 4rem 0;
+      }
+
+      .next-button {
+        position: relative;
+        padding: 0;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease;
+      }
+
+      .next-button:hover {
+        transform: scale(1.05);
+      }
+
+      .next-button:active {
+        transform: scale(0.98);
+      }
+
+      /* Si no puedes usar GIF en el botón */
+      .next-button-simple {
+        padding: 20px 60px;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .next-button-simple:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 50px rgba(102, 126, 234, 0.6);
+      }
+
+      .cat-gif {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 20px;
+      }
+
+      /* Espaciado */
+      .spacer {
+        height: 50vh;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .blur-box {
+          padding: 2rem 1.5rem;
+          margin: 1rem;
+        }
+
+        .hero-title {
+          font-size: 20vw;
+        }
+
+        .next-button-simple {
+          padding: 15px 40px;
+          font-size: 1.2rem;
+        }
+
+        .cat-gif {
+          width: 150px;
+          height: 150px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div class="video-container">
-      <video autoplay playsinline id="gift-video">
-        <source src="/mi-video-regalo.mp4" type="video/mp4" />
-        Tu navegador no soporta videos.
+    <!-- SECCIÓN HERO CON EFECTO APPLE -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">TÍTULO</h1>
+      </div>
+    </section>
+
+    <!-- SECCIÓN CON VIDEO/GIF DE FONDO -->
+    <section class="content-section">
+      <!-- Video de fondo - reemplaza con tu video/gif -->
+      <video class="background-media" autoplay loop muted playsinline>
+        <source src="/videos/background.mp4" type="video/mp4" />
+        <!-- Fallback a GIF -->
+        <img
+          src="/videos/background.gif"
+          class="background-media"
+          alt="background"
+        />
       </video>
 
-      <button
-        class="replay-btn"
-        onclick="document.getElementById('gift-video').play()"
-      >
-        Ver de nuevo ❤️
+      <div class="blur-box">
+        <h2>Historia del Gato</h2>
+
+        <p class="fade-paragraph">
+          Este es el primer párrafo de tu historia. Aparecerá suavemente
+          mientras haces scroll.
+        </p>
+
+        <p class="fade-paragraph">
+          Este es el segundo párrafo. También aparecerá con un efecto suave de
+          fade-in mientras scrolleas.
+        </p>
+
+        <p class="fade-paragraph">
+          Tercer párrafo con más contenido. Puedes agregar todo el texto que
+          necesites aquí.
+        </p>
+
+        <p class="fade-paragraph">
+          Cuarto párrafo. Los efectos se aplican a cada uno de forma individual.
+        </p>
+
+        <p class="fade-paragraph">
+          Quinto párrafo final. Después de esto viene el botón para continuar.
+        </p>
+
+        <p class="fade-paragraph">
+          Este es el segundo párrafo. También aparecerá con un efecto suave de
+          fade-in mientras scrolleas.
+        </p>
+
+        <p class="fade-paragraph">
+          Tercer párrafo con más contenido. Puedes agregar todo el texto que
+          necesites aquí.
+        </p>
+
+        <p class="fade-paragraph">
+          Cuarto párrafo. Los efectos se aplican a cada uno de forma individual.
+        </p>
+
+        <p class="fade-paragraph">
+          Quinto párrafo final. Después de esto viene el botón para continuar.
+        </p>
+      </div>
+    </section>
+
+    <!-- ESPACIADOR PARA HACER SCROLL -->
+    <div class="spacer"></div>
+
+    <!-- BOTÓN CON GIF DEL GATO -->
+    <section class="button-section">
+      <!-- Opción 1: Botón con GIF de gato (si es posible) -->
+      <button class="next-button" onclick="window.location.href='./next.astro'"
+        >
+        <img src="/images/cat-button.gif" alt="Next" class="cat-gif" />
       </button>
-    </div>
+
+      <!-- Opción 2: Botón simple (descomenta si prefieres esta opción) -->
+      <!-- <button class="next-button-simple" onclick="window.location.href='/next-page'">
+      NEXT
+    </button> -->
+    </section>
+
+    <div class="spacer"></div>
+
+    <script is:inline>
+      // EFECTO APPLE EN EL TÍTULO HERO
+      const heroTitle = document.querySelector(".hero-title");
+      const heroSection = document.querySelector(".hero-section");
+
+      window.addEventListener("scroll", () => {
+        const scrollY = window.scrollY;
+        const heroHeight = heroSection.offsetHeight;
+
+        const startEffect = window.innerHeight * 0.3;
+        const endEffect = heroHeight - window.innerHeight;
+
+        if (scrollY < startEffect) {
+          heroTitle.style.transform = "scale(1)";
+          heroTitle.style.opacity = "1";
+        } else {
+          const progress = (scrollY - startEffect) / (endEffect - startEffect);
+          const clampedProgress = Math.max(0, Math.min(1, progress));
+
+          const scale = 1 + clampedProgress * 2.5;
+          const opacity = 1 - clampedProgress * 0.8;
+
+          heroTitle.style.transform = `scale(${scale})`;
+          heroTitle.style.opacity = opacity;
+        }
+      });
+
+      // EFECTO FADE-IN EN PÁRRAFOS
+      const fadeElements = document.querySelectorAll(".fade-paragraph");
+
+      const observerOptions = {
+        threshold: 0.2,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          } else {
+            entry.target.classList.remove("visible");
+          }
+        });
+      }, observerOptions);
+
+      fadeElements.forEach((element) => {
+        observer.observe(element);
+      });
+
+      const video = document.querySelector(".background-media");
+      if (video && video.tagName === "VIDEO") {
+        video.play().catch((e) => console.log("Video autoplay prevented:", e));
+      }
+    </script>
   </body>
 </html>
