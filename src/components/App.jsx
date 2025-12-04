@@ -60,7 +60,7 @@ export default function ParallaxComponent() {
             alignItems: 'center'
           }}
         >
-          <h2>Thank you for saving me!</h2>
+          <h2>Thank you for saving me Liu♥</h2>
 
           <a href="./src/pages/video.astro" style={{
             marginTop: '20px',
@@ -72,7 +72,7 @@ export default function ParallaxComponent() {
             fontWeight: 'bold',
             fontSize: '30px',
           }}>
-            Ir a la Galería
+            Press me!!!
           </a>
         </ParallaxLayer>
       </Parallax>
