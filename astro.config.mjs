@@ -7,8 +7,7 @@ import node from '@astrojs/node';
 // https://astro.build/config
 export default defineConfig({
   integrations: [react()],
-  output: 'server', // 👈 Aquí está la coma
-  adapter: node({
-    mode: 'standalone'
-  })
+  site: 'https://Horux1.github.io',
+  base: '/AstroCatt',
+  output: 'static',
 });
